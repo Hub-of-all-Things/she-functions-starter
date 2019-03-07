@@ -1,0 +1,134 @@
+service: smart-hat-engine
+
+custom:
+  awsAccountId:
+    Ref: AWS::AccountId
+
+provider:
+  name: aws
+  runtime: java8
+  region: eu-west-1
+  stage: dev
+  memorySize: 256
+  versionFunctions: false
+  timeout: 10
+  logRetentionInDays: 1
+  endpointType: regional
+  vpc:
+    securityGroupIds:
+      - sg-237cde5a
+    subnetIds:
+      - subnet-006905369927e2240
+      - subnet-0d535a2f4a04a81ce
+
+package:
+  individually: true
+  artifact: artifacts/data-feed-counter.jar
+
+functions:
+
+  api-data-feed-counter:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+    timeout: 120
+    events:
+      - http:
+          path: data-feed-counter/1.0.0
+          method: post
+
+  api-data-feed-counter-configuration:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterConfigurationProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+    events:
+      - http:
+          path: data-feed-counter/1.0.0/configuration
+          method: get
+
+  api-data-feed-counter-bundle:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterBundleProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+    events:
+      - http:
+          path: data-feed-counter/1.0.0/data-bundle
+          method: get
+
+  data-feed-counter:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+    timeout: 120
+
+  data-feed-counter-configuration:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterConfigurationHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+
+  data-feed-counter-bundle:
+    handler: org.hatdex.hat.she.functions.DataFeedCounterBundleHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/data-feed-counter.jar
+
+  api-sentiment-tracker:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
+    timeout: 120
+    events:
+      - http:
+          path: sentiment-tracker/1.0.0
+          method: post
+
+  api-sentiment-tracker-configuration:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerConfigurationProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
+    events:
+      - http:
+          path: sentiment-tracker/1.0.0/configuration
+          method: get
+
+  api-sentiment-tracker-bundle:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerBundleProxyHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
+    events:
+      - http:
+          path: sentiment-tracker/1.0.0/data-bundle
+          method: get
+
+  sentiment-tracker:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
+    timeout: 300
+
+  sentiment-tracker-configuration:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerConfigurationHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
+
+  sentiment-tracker-bundle:
+    handler: org.hatdex.hat.she.functions.SentimentTrackerBundleHandler::handle
+    package:
+      individually: true
+      artifact: artifacts/sentiment-tracker.jar
+    memorySize: 1024
