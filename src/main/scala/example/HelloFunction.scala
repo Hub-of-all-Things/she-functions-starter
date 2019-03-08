@@ -18,6 +18,7 @@ class HelloFunction {
 
   val namespace = "she"
   val endpoint = "insights/activity-records"
+  val dataBundle = bundleFilterByDate(None, None)
 
   val configuration: FunctionConfiguration = FunctionConfiguration(
     "hello-function",
@@ -40,7 +41,7 @@ class HelloFunction {
       Some("/she/feed/hello/function")),
     ApplicationDeveloper("hatdex", "HAT Data Exchange Ltd", "https://hatdex.org", Some("United Kingdom"), None),
     FunctionTrigger.TriggerPeriodic(Period.parse("P1W")),
-    dataBundle = bundleFilterByDate(None, None),
+    dataBundle,
     status = FunctionStatus(available = true, enabled = false, lastExecution = None, executionStarted = None))
 
   protected def dateFilter(fromDate: Option[DateTime], untilDate: Option[DateTime]): Option[FilterOperator.Operator] = {
