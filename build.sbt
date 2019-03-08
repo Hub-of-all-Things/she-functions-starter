@@ -1,14 +1,14 @@
 import sbt.Keys._
 import sbt._
 
-name := "data-feed-counter"
+name := "hat-she-function-template"
 
 resolvers += Resolver.sonatypeRepo("public")
 resolvers += "HAT Library Artifacts Releases" at "https://s3-eu-west-1.amazonaws.com/library-artifacts-releases.hubofallthings.com"
 resolvers += "HAT Library Artifacts Snapshots" at "https://s3-eu-west-1.amazonaws.com/library-artifacts-snapshots.hubofallthings.com"
 
 scalaVersion := "2.12.4"
-assemblyJarName in assembly := "data-feed-counter.jar"
+assemblyJarName in assembly := "hat-she-function-template.jar"
 
 libraryDependencies ++= Seq(
   "org.hatdex" %% "aws-lambda-scala-handler" % "0.0.2-SNAPSHOT",
