@@ -5,8 +5,7 @@ This repository contains a Scala template to develop SHE functions.
 
 ## Step 1 - Development
 1. Locate the method `doExecute` in the class `HelloFunction` and replace the method with your algorithm
-    * the `data` input to this method has the data structure documented in the `BUNDLED DATA` section of
-    https://developers.hubofallthings.com/guides/data-bundling/02-data-bundles.html
+    * the `data` input to this method has a specific structure which you can retrieve https://api.hubofallthings.com/?version=latest#ce6c20b9-9897-47af-8fec-e679f89ad0ad
     * the return object should be a `play.api.libs.json.JsObject` as defined here -> https://www.playframework.com/documentation/2.7.x/api/scala/play/api/libs/json/JsObject.html
 2. Refactor your class name and variables. Search `*.scala, *.sbt, serverless.yml, build.sh` files for the following text
     * *HelloFunction*
@@ -53,13 +52,13 @@ layers:
 2. We have a Postman collection to help test your SHE function -> `https://documenter.getpostman.com/view/110376/RWTiveWS`
 
 3. Testing Steps using the above deployment as example
-    * Load the function configuration with `GET https://6umdgqg102.execute-api.eu-west-1.amazonaws.com/dev/hello-function/1.0.0/configuration`
-        - refer to `https://documenter.getpostman.com/view/110376/RWTiveWS#eef329f6-76ad-4791-8d64-6fe33b8d9afa` for more details
+    * Load the function configuration with `GET https://6umdgqg102.execute-api.eu-west-1.amazonaws.com/dev/hello-world/1.0.0/configuration`
+        - refer to `https://documenter.getpostman.com/view/110376/RWTiveWS?version=latest#eef329f6-76ad-4791-8d64-6fe33b8d9afa` for more details
         - Let's call the output of this action as `sheFunctionConfiguration`
     * Using an existing HAT with the data you want, create a `data-bundle` of the data you want.
-        - Login to the HAT `https://documenter.getpostman.com/view/110376/RWTiveWS#89a7cec1-48f2-48ee-b73a-af76f091fc76`
-        - Create the `data-bundle` -> `https://developers.hubofallthings.com/guides/data-bundling/02-data-bundles.html`
-        - Retrieve the `values` of the `data-bundle` -> `https://documenter.getpostman.com/view/110376/RWTiveWS#af0d6b79-dd06-4de6-99c9-1dfa571a85d0`
+        - Login to the HAT `https://documenter.getpostman.com/view/110376/RWTiveWS?version=latest#89a7cec1-48f2-48ee-b73a-af76f091fc76`
+        - Create the `data-bundle` -> `https://docs.dataswift.io/guides/data-bundling`
+        - Retrieve the `values` of the `data-bundle` -> `https://documenter.getpostman.com/view/110376/RWTiveWS?version=latest#af0d6b79-dd06-4de6-99c9-1dfa571a85d0`
         - NB: **When you create a `data-bundle` with the name `hello`, you must retrieve it with the same name**
         ```
         # Creating the bundle with the name hello
@@ -85,4 +84,4 @@ layers:
         ```
         
     * If you do not have existing HAT with the data you want to test with, you can write some test data to the HAT
-    with `https://developers.hubofallthings.com/guides/raw_data_io/01-data-input.html` and then follow the above test sequence.
+    with `https://docs.dataswift.io/guides/raw-data-io` and then follow the above test sequence.
