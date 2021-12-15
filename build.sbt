@@ -7,8 +7,8 @@ resolvers += Resolver.sonatypeRepo("public")
 resolvers += "HAT Library Artifacts Releases" at "https://s3-eu-west-1.amazonaws.com/library-artifacts-releases.hubofallthings.com"
 resolvers += "HAT Library Artifacts Snapshots" at "https://s3-eu-west-1.amazonaws.com/library-artifacts-snapshots.hubofallthings.com"
 
-scalaVersion := "2.12.15"
-assemblyJarName in assembly := "hat-she-function-template.jar"
+scalaVersion := "2.12.4"
+(assembly / assemblyJarName) := "hat-she-function-template.jar"
 
 libraryDependencies ++= Seq(
   "org.hatdex" %% "aws-lambda-scala-handler" % "0.0.2-SNAPSHOT",
@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
     ExclusionRule(organization = "com.typesafe.play", name="play-akka-http-server"))
 )
 
-assemblyMergeStrategy in assembly := {
+(assembly / assemblyMergeStrategy) := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case PathList("com", "amazonaws", "services", xs @ _*) if !xs.contains("lambda") => MergeStrategy.discard
   // remove test dependencies
@@ -80,4 +80,4 @@ scalacOptions ++= Seq(
   "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 
-test in assembly := {}
+(assembly / test) := {}
