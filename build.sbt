@@ -12,8 +12,8 @@ scalaVersion := "2.12.4"
 
 libraryDependencies ++= Seq(
   "org.hatdex" %% "aws-lambda-scala-handler" % "0.0.2-SNAPSHOT",
-  "org.specs2" %% "specs2-core" % "4.0.0" % "provided",
-  "org.specs2" %% "specs2-matcher-extra" % "4.0.0" % "provided",
+  "org.specs2" %% "specs2-core" % "4.0.5" % "provided",
+  "org.specs2" %% "specs2-matcher-extra" % "4.0.5" % "provided",
   "org.hatdex" %% "hat-client-scala-play" % "2.6.2-SNAPSHOT" excludeAll(
     ExclusionRule("commons-logging", "commons-logging"),
     ExclusionRule(organization = "com.typesafe", name="akka-stream"),
